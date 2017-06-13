@@ -27,7 +27,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".NavigatorMenu"
             android:screenOrientation="portrait"/>
-
+        
     </application>
 
 </manifest>

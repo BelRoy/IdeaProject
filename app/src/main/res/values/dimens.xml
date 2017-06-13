@@ -7,4 +7,7 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="size_mini">20dp</dimen>
+    <dimen name="size_tablet">65dp</dimen>
+    <dimen name="size_ak">45dp</dimen>
+    <dimen name="size_tablet_input">38dp</dimen>
 </resources>

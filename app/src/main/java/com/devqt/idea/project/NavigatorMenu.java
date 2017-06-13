@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+//import android.app.Fragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import fragments.Arduino;
 
 public class NavigatorMenu extends ActionBarActivity {
 
@@ -129,20 +132,20 @@ public class NavigatorMenu extends ActionBarActivity {
         // Update the main content by replacing fragments
         Fragment fragment = null;
         switch (position) {
-         /*  case 0:
-                fragment = new Android(); getDrawable(R.drawable.android_ico);
+          case 0:
+               // fragment = new Android(); getDrawable(R.drawable.android_ico);
                 break;
             case 1:
                 fragment = new Arduino(); getDrawable(R.drawable.arduino_ico);
                 break;
             case 2:
-                fragment = new LEGO(); getDrawable(R.drawable.lego_ico);
+          //      fragment = new LEGO(); getDrawable(R.drawable.lego_ico);
                 break;
             case 3:
-               fragment = new STL(); getDrawable(R.drawable.ic_stl);
+           //    fragment = new STL(); getDrawable(R.drawable.ic_stl);
                 break;
             default:
-                break;*/
+                break;
         }
 
         // Insert the fragment by replacing any existing fragment
