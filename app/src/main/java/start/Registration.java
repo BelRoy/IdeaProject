@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devqt.idea.project.Navigate;
+import com.devqt.idea.project.NavigatorMenu;
 import com.devqt.idea.project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -80,7 +80,7 @@ public class Registration extends Activity implements View.OnClickListener{
 
                         if(task.isSuccessful()){
                             finish();
-                            startActivity(new Intent(getApplicationContext(), Navigate.class));
+                            startActivity(new Intent(getApplicationContext(), NavigatorMenu.class));
                         }else{
 
                             Toast.makeText(Registration.this,"Registration Error",Toast.LENGTH_LONG).show();
@@ -89,6 +89,12 @@ public class Registration extends Activity implements View.OnClickListener{
                     }
                 });
 
+    }
+
+    private void texttv(){
+        finish();
+
+        startActivity(new Intent(this, LogIn.class));
     }
 
     @Override
@@ -100,7 +106,7 @@ public class Registration extends Activity implements View.OnClickListener{
 
         if (view == sign_in) {
 
-            startActivity(new Intent(this, LogIn.class));
+            texttv();
 
         }
 

@@ -30,6 +30,12 @@ public class StartDisplay extends AppCompatActivity {
                 finish();
             }
         });
+        findViewById(R.id.idea).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StartDisplay.this, NavigatorMenu.class));
+            }
+        });
     }
 
 

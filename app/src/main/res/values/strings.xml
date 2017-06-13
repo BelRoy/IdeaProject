@@ -14,10 +14,23 @@
 
     <string name="title_activity_navigate">Idea Projects</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
     <string name="welcome">Welcome</string>
     <string name="stl">STL</string>
+    <string name="logout">log out</string>
+
+    <string name="screen_one">Android</string>
+    <string name="screen_two">Arduino</string>
+    <string name="screen_three">LEGO</string>
+    <string name="screen_four">STL</string>
+
+    <string-array name="screen_array">
+        <item>Android</item>
+        <item>Arduino</item>
+        <item>LEGO</item>
+        <item>STL</item>
+    </string-array>
 </resources>

@@ -1,10 +1,10 @@
 package start;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -12,14 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devqt.idea.project.Navigate;
+import com.devqt.idea.project.NavigatorMenu;
 import com.devqt.idea.project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LogIn  extends Activity implements View.OnClickListener{
+public class LogIn  extends AppCompatActivity implements View.OnClickListener{
 
     private EditText mail;
     private EditText pass;
@@ -41,12 +41,14 @@ public class LogIn  extends Activity implements View.OnClickListener{
         reg = (TextView) findViewById(R.id.reg);
         progress = new ProgressDialog(this);
 
-        findViewById(R.id.idea).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LogIn.this, Navigate.class));
-            }
-        });
+        reg.setOnClickListener(this);
+        check.setOnClickListener(this);
+
+        if(auth.getCurrentUser() != null){
+            finish();
+
+            startActivity(new Intent(getApplicationContext(), NavigatorMenu.class));
+        }
     }
 
 
@@ -79,13 +81,19 @@ public class LogIn  extends Activity implements View.OnClickListener{
 
                         if (task.isSuccessful()) {
                             finish();
-                            startActivity(new Intent(getApplicationContext(), Navigate.class));
+                            startActivity(new Intent(getApplicationContext(), NavigatorMenu.class));
                         } else {
                             Toast.makeText(LogIn.this, "Please, try again", Toast.LENGTH_SHORT).show();
                         }
                         progress.dismiss();
                     }
                 });
+    }
+
+    private void reg() {
+        finish();
+
+        startActivity(new Intent(this, Registration.class));
     }
 
 
@@ -97,7 +105,7 @@ public class LogIn  extends Activity implements View.OnClickListener{
         }
 
         if (view == reg) {
-        startActivity(new Intent(this, Registration.class));
+        reg();
 
         }
     }

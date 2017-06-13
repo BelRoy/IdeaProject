@@ -2,4 +2,5 @@
 <resources>
     <string name="welcome">Welcome</string>
     <string name="stl">STL</string>
+    <string name="logout">log out</string>
 </resources>
