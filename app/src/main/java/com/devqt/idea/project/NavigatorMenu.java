@@ -1,192 +1,167 @@
 package com.devqt.idea.project;
 
-
-import android.annotation.TargetApi;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-//import android.app.Fragment;
-import android.util.Log;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
+import fragments.Android;
 import fragments.Arduino;
 
-public class NavigatorMenu extends ActionBarActivity {
 
-    private String[] mScreenTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+public class NavigatorMenu extends AppCompatActivity {
+    protected DrawerLayout mDrawer;
+        Toolbar toolbar;
+        ActionBarDrawerToggle   drawerToggle;
+        Fragment                oneFragment     = new Android();
+        Fragment                twoFragment     = new Arduino();
+       // Fragment                threeFragment   = new LEGO();
+      //  Fragment                fourFragment    = new STL();
 
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.navigate_menu);
-
-        mTitle = mDrawerTitle = getTitle();
-        mScreenTitles = getResources().getStringArray(R.array.screen_array);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mScreenTitles));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this, /* host Activity */
-                mDrawerLayout, /* DrawerLayout object */
-                R.drawable.ic_idea,
-                R.string.drawer_open,
-                R.string.drawer_close
-        ) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle(mTitle);
-                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle(mDrawerTitle);
-                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        // Initialize the first fragment when the application first loads.
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu;
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    /* Called whenever we call invalidateOptionsMenu() */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_search).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle action buttons
-        switch(item.getItemId()) {
-            case R.id.action_search:
-                // Show toast about click.
-                Toast.makeText(this, R.string.action_settings, Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /* The click listener for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.drawer_layout);
 
-    /** Swaps fragments in the main content view */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void selectItem(int position) {
-        // Update the main content by replacing fragments
-        Fragment fragment = null;
-        switch (position) {
-          case 0:
-               // fragment = new Android(); getDrawable(R.drawable.android_ico);
-                break;
-            case 1:
-                fragment = new Arduino(); getDrawable(R.drawable.arduino_ico);
-                break;
-            case 2:
-          //      fragment = new LEGO(); getDrawable(R.drawable.lego_ico);
-                break;
-            case 3:
-           //    fragment = new STL(); getDrawable(R.drawable.ic_stl);
-                break;
-            default:
-                break;
+            addFragment(oneFragment);
+
+            // Main Toolbar
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            //setSupportActionBar(toolbar);
+
+            // Find our drawer view
+            mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            NavigationView nvDrawer = (NavigationView) findViewById(R.id.nvView);
+            setupDrawerContent(nvDrawer);
+            drawerToggle = setupDrawerToggle();
+            mDrawer.addDrawerListener(drawerToggle);
+
         }
 
-        // Insert the fragment by replacing any existing fragment
-        if (fragment != null) {
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.toolbar_menu, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+
+            if (drawerToggle.onOptionsItemSelected(item)) {
+                return true;
+            }
+
+            switch (item.getItemId()) {
+                case R.id.action_toolbar_menu:
+                    replaceFragment(twoFragment);
+                    return true;
+
+                case android.R.id.home:
+                    mDrawer.openDrawer(GravityCompat.START);
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }
+
+        // 'onPostCreate' called when activity start-up is complete after 'onStart()'
+        // NOTE! Make sure to override the method with only a single 'Bundle' argument
+        @Override
+        protected void onPostCreate(Bundle savedInstanceState) {
+            super.onPostCreate(savedInstanceState);
+            // Sync the toggle state after onRestoreInstanceState has occurred.
+            drawerToggle.syncState();
+        }
+
+        private void setupDrawerContent(NavigationView navigationView) {
+            navigationView.setNavigationItemSelectedListener(
+                    new NavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                            selectDrawerItem(menuItem);
+                            return true;
+                        }
+                    });
+        }
+
+        public void selectDrawerItem(MenuItem menuItem) {
+
+            // Create a new fragment and specify the fragment to show based on nav item clicked
+            Fragment fragment = null;
+            Class fragmentClass;
+
+            switch(menuItem.getItemId()) {
+               case R.id.android_i:
+                    fragmentClass = Android.class;
+                    break;
+                case R.id.arduino_i:
+                    fragmentClass = Arduino.class;
+                    break;
+                /*case R.id.lego_i:
+                    fragmentClass = LEGO.class;
+                    break;
+                case R.id.stl_i:
+                    fragmentClass = STL.class;
+                    break;
+                case R.id.navigation_item_five:
+                    fragmentClass = FiveFragment.class;
+                    break;
+                case R.id.navigation_item_six:
+                    fragmentClass = SixFragment.class;
+                    break;*/
+                default:
+                    fragmentClass = Android.class;
+            }
+
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-            // Highlight the selected item, update the title, and close the drawer
-            mDrawerList.setItemChecked(position, true);
-            setTitle(mScreenTitles[position]);
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else {
-            // Error
-            Log.e(this.getClass().getName(), "Error. Fragment is not created");
+            // Close the navigation drawer
+            mDrawer.closeDrawers();
         }
-    }
 
-    @Override
-    public void setTitle(CharSequence title) {
-        mTitle = title;
-        getSupportActionBar().setTitle(mTitle);
-    }
+        private ActionBarDrawerToggle setupDrawerToggle() {
+            return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+        }
 
-    /**
-     * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
-     */
+        @Override
+        public void onConfigurationChanged(Configuration newConfig) {
+            super.onConfigurationChanged(newConfig);
+            // Pass any configuration change to the drawer toggles
+            drawerToggle.onConfigurationChanged(newConfig);
+        }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
+        private void addFragment(Fragment fragment) {
+            FragmentTransaction  transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(R.id.flContent, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
+        private void replaceFragment(Fragment fragment) {
+            FragmentTransaction  transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.flContent, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
 }
