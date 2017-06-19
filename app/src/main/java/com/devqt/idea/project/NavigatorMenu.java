@@ -40,6 +40,7 @@ public class NavigatorMenu extends AppCompatActivity {
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             //setSupportActionBar(toolbar);
 
+
             // Find our drawer view
             mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             NavigationView nvDrawer = (NavigationView) findViewById(R.id.nvView);

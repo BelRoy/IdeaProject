@@ -11,9 +11,15 @@ import com.devqt.idea.project.R;
 
 public class Arduino extends Fragment {
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.arduino, container, false);
+
+
+
     }
+
 }
