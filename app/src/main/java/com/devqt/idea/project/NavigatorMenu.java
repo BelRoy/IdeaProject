@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import fragments.A3d_MAX;
 import fragments.Android;
 import fragments.Arduino;
 
@@ -27,6 +28,8 @@ public class NavigatorMenu extends AppCompatActivity {
         Fragment                twoFragment     = new Arduino();
        // Fragment                threeFragment   = new LEGO();
       //  Fragment                fourFragment    = new STL();
+       Fragment                fiveFragment     = new A3d_MAX();
+
 
 
         @Override
@@ -66,7 +69,7 @@ public class NavigatorMenu extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.action_toolbar_menu:
-                    replaceFragment(twoFragment);
+                    replaceFragment(fiveFragment);
                     return true;
 
                 case android.R.id.home:
@@ -116,11 +119,11 @@ public class NavigatorMenu extends AppCompatActivity {
                     break;
                 case R.id.stl_i:
                     fragmentClass = STL.class;
+                    break;*/
+                case R.id.a3d_max_i:
+                    fragmentClass = A3d_MAX.class;
                     break;
-                case R.id.navigation_item_five:
-                    fragmentClass = FiveFragment.class;
-                    break;
-                case R.id.navigation_item_six:
+               /* case R.id.navigation_item_six:
                     fragmentClass = SixFragment.class;
                     break;*/
                 default:

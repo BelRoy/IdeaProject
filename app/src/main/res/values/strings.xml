@@ -27,6 +27,7 @@
     <string name="screen_three">LEGO</string>
     <string name="screen_four">STL</string>
     <string name="download">Download</string>
+    <string name="a3dmax">3D Max</string>
 
     <string-array name="screen_array">
         <item>Android</item>

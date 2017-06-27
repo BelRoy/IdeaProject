@@ -4,4 +4,5 @@
     <string name="stl">STL</string>
     <string name="logout">log out</string>
     <string name="download">Download</string>
+    <string name="a3dmax">3D Max</string>
 </resources>
