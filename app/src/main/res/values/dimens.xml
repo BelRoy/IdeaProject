@@ -11,4 +11,7 @@
     <dimen name="size_ak">45dp</dimen>
     <dimen name="size_tablet_input">38dp</dimen>
     <dimen name="txt_desc">12dp</dimen>
+    <dimen name="txt_lst">21sp</dimen>
+    <dimen name="pad_lst">10dp</dimen>
+    <dimen name="rl_pad">10dp</dimen>
 </resources>

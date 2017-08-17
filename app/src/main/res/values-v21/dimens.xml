@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="txt_lst">21sp</dimen>
+    <dimen name="pad_lst">10dp</dimen>
+    <dimen name="rl_pad">10dp</dimen>
+</resources>
