@@ -4,6 +4,7 @@ package com.devqt.idea.project;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.devqt.idea.project.fragments.ArduinoFragment;
 import com.devqt.idea.project.fragments.LegoFragment;
 import com.devqt.idea.project.fragments.MaxFragment;
 import com.devqt.idea.project.fragments.STLFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainMenu extends Activity implements ListView.OnItemClickListener {
@@ -33,6 +35,8 @@ public class MainMenu extends Activity implements ListView.OnItemClickListener {
         setContentView(R.layout.main_menu);
 
 
+
+
         mNavigationDrawerHelper = new NavigationDrawerHelper();
         mNavigationDrawerHelper.init(this, this);
 
@@ -41,6 +45,17 @@ public class MainMenu extends Activity implements ListView.OnItemClickListener {
 
 
         attachFragment();
+
+
+    }
+
+    private void signOut()
+    {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MainMenu.this, LogIn.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
 
@@ -59,6 +74,10 @@ public class MainMenu extends Activity implements ListView.OnItemClickListener {
 
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (id == R.id.exit) {
+            signOut(); finish();
         }
 
 
@@ -102,7 +121,7 @@ public class MainMenu extends Activity implements ListView.OnItemClickListener {
             fragmentManager.beginTransaction().replace(R.id.fragment_container, mFragment).commit();
 
         } else {
-            Log.e("MainActivity", "Error in creating fragment");
+            Log.e("MainMenu", "Error in creating fragment");
         }
     }
 
