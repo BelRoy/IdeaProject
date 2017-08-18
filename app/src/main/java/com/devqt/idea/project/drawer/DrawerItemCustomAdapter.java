@@ -11,14 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.devqt.idea.project.R;
+import com.devqt.idea.project.object.ObjectDrawerItem;
+
 
 public class DrawerItemCustomAdapter extends BaseAdapter {
 
     Context mContext;
     int mLayoutResourceId;
     ObjectDrawerItem mData[] = null;
-
-
 
     public DrawerItemCustomAdapter(Context context, int layoutResourceId, ObjectDrawerItem[] data) {
         this.mContext = context;
@@ -38,7 +38,7 @@ public class DrawerItemCustomAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override

@@ -36,11 +36,8 @@ public class MainMenu extends Activity implements ListView.OnItemClickListener {
 
 
 
-
         mNavigationDrawerHelper = new NavigationDrawerHelper();
-        mNavigationDrawerHelper.init(this, this);
-
-
+      mNavigationDrawerHelper.init(this, this);
         mFragment = new AndroidFragment();
 
 
@@ -76,9 +73,9 @@ public class MainMenu extends Activity implements ListView.OnItemClickListener {
             return true;
         }
 
-        if (id == R.id.exit) {
+        /*if (id == R.id.exit) {
             signOut(); finish();
-        }
+        }*/
 
 
         mNavigationDrawerHelper.handleOnOptionsItemSelected(item);

@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+
 import com.devqt.idea.project.R;
+import com.devqt.idea.project.object.ObjectDrawerItem;
 
 public class NavigationDrawerHelper {
 
@@ -26,7 +28,7 @@ public class NavigationDrawerHelper {
         mDrawerListView = (ListView) activity.findViewById(R.id.left_drawer);
 
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[5];
 
         drawerItem[0] = new ObjectDrawerItem(R.drawable.android_ico, "Android");
         drawerItem[1] = new ObjectDrawerItem(R.drawable.arduino_ico, "Arduino");
