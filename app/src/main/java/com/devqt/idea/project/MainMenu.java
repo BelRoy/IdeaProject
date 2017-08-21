@@ -1,20 +1,26 @@
 package com.devqt.idea.project;
 
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.content.res.Configuration;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
+import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
+import android.widget.LinearLayout;
 
-import com.devqt.idea.project.drawer.NavigationDrawerHelper;
 import com.devqt.idea.project.fragments.AndroidFragment;
 import com.devqt.idea.project.fragments.ArduinoFragment;
 import com.devqt.idea.project.fragments.LegoFragment;
@@ -23,126 +29,202 @@ import com.devqt.idea.project.fragments.STLFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class MainMenu extends Activity implements ListView.OnItemClickListener {
+public class MainMenu  extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    private NavigationDrawerHelper mNavigationDrawerHelper;
-
-    private Fragment mFragment;
+    private static final String SELECTED_ITEM_ID = "SELECTED_ITEM_ID";
+    private final Handler mDrawerHandler = new Handler();
+    private DrawerLayout mDrawerLayout;
+    private int mPrevSelectedId;
+    private NavigationView mNavigationView;
+    public int mSelectedId;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        assert mNavigationView != null;
+        mNavigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawerLayout, mToolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close)
+
+        {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                super.onDrawerSlide(drawerView, 0);
+            }
+
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, 0);
+            }
+
+            private void signOut()
+            {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainMenu.this, LogIn.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        };
 
 
-        mNavigationDrawerHelper = new NavigationDrawerHelper();
-      mNavigationDrawerHelper.init(this, this);
-        mFragment = new AndroidFragment();
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
 
+        mDrawerToggle.syncState();
 
-        attachFragment();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mSelectedId = mNavigationView.getMenu().getItem(prefs.getInt("default_view", 0)).getItemId();
+        mSelectedId = savedInstanceState == null ? mSelectedId : savedInstanceState.getInt(SELECTED_ITEM_ID);
+        mPrevSelectedId = mSelectedId;
+        mNavigationView.getMenu().findItem(mSelectedId).setChecked(true);
 
+        if (savedInstanceState == null) {
+            mDrawerHandler.removeCallbacksAndMessages(null);
+            mDrawerHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    navigate(mSelectedId);
+                }
+            }, 250);
 
+            boolean openDrawer = prefs.getBoolean("open_drawer", false);
+
+            if (openDrawer)
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            else
+                mDrawerLayout.closeDrawers();
+        }
     }
 
-    private void signOut()
-    {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(MainMenu.this, LogIn.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+    public void switchFragment(int itemId) {
+        mSelectedId = mNavigationView.getMenu().getItem(itemId).getItemId();
+        mNavigationView.getMenu().findItem(mSelectedId).setChecked(true);
+        mDrawerHandler.removeCallbacksAndMessages(null);
+        mDrawerHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                navigate(mSelectedId);
+            }
+        }, 250);
+        mDrawerLayout.closeDrawers();
     }
 
+    private void navigate(final int itemId) {
+        final View elevation = findViewById(R.id.elevation);
+        Fragment navFragment = null;
+        switch (itemId) {
+            case R.id.nav_1:
+                mPrevSelectedId = itemId;
+                setTitle(R.string.android);
+                navFragment = new AndroidFragment();
+                break;
+            case R.id.nav_2:
+                mPrevSelectedId = itemId;
+                setTitle(R.string.arduino);
+                navFragment = new ArduinoFragment();
+                break;
+            case R.id.nav_3:
+                mPrevSelectedId = itemId;
+                setTitle(R.string.lego);
+                navFragment = new LegoFragment();
+                break;
+            case R.id.nav_4:
+                mPrevSelectedId = itemId;
+                setTitle(R.string.stl);
+                navFragment = new STLFragment();
+                break;
+            case R.id.nav_5:
+                mPrevSelectedId = itemId;
+                setTitle(R.string.a3dmax);
+                navFragment = new MaxFragment();
+                break;
+            //case R.id.nav_6:
+            //startActivity(new Intent(this, SettingsActivity.class));
+            //mNavigationView.getMenu().findItem(mPrevSelectedId).setChecked(true);
+            //return;
+            case R.id.nav_7:
+                startActivity(new Intent(this, AboutMe.class));
+                mNavigationView.getMenu().findItem(mPrevSelectedId).setChecked(true);
+                return;
+            /*case R.id.nav_8:
+                signOut(); finish();
+                return;*/
+        }
+
+        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(4));
+
+        if (navFragment != null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            try {
+                transaction.replace(R.id.content_frame, navFragment).commit();
+
+
+                if (elevation != null) {
+                    params.topMargin = navFragment instanceof ArduinoFragment ? dp(48) : 0;
+
+                    Animation a = new Animation() {
+                        @Override
+                        protected void applyTransformation(float interpolatedTime, Transformation t) {
+                            elevation.setLayoutParams(params);
+                        }
+                    };
+                    a.setDuration(150);
+                    elevation.startAnimation(a);
+                }
+            } catch (IllegalStateException ignored) {
+            }
+        }
+    }
+
+    public int dp(float value) {
+        float density = getApplicationContext().getResources().getDisplayMetrics().density;
+
+        if (value == 0) {
+            return 0;
+        }
+        return (int) Math.ceil(density * value);
+    }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        menuItem.setChecked(true);
+        mSelectedId = menuItem.getItemId();
+        mDrawerHandler.removeCallbacksAndMessages(null);
+        mDrawerHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                navigate(mSelectedId);
+            }
+        }, 250);
+        mDrawerLayout.closeDrawers();
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        /*if (id == R.id.exit) {
-            signOut(); finish();
-        }*/
-
-
-        mNavigationDrawerHelper.handleOnOptionsItemSelected(item);
-        return super.onOptionsItemSelected(item);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SELECTED_ITEM_ID, mSelectedId);
     }
-
-
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        mNavigationDrawerHelper.handleSelect(position);
-
-
-        switch (position) {
-            case 0:
-                mFragment = new AndroidFragment();
-                break;
-            case 1:
-                mFragment = new ArduinoFragment();
-                break;
-            case 2:
-                mFragment = new LegoFragment();
-                break;
-            case 3:
-                mFragment = new STLFragment();
-                break;
-            case 4:
-                mFragment = new MaxFragment();
-                break;
-        }
-        attachFragment();
-
-    }
-
-
-    private void attachFragment() {
-        if (mFragment != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, mFragment).commit();
-
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Log.e("MainMenu", "Error in creating fragment");
+            super.onBackPressed();
         }
     }
-
-
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mNavigationDrawerHelper.syncState();
-    }
-
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        mNavigationDrawerHelper.handleOnPrepareOptionMenu(menu);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        mNavigationDrawerHelper.syncState();
-        super.onConfigurationChanged(newConfig);
-    }
-
-
 }

@@ -25,7 +25,8 @@
 
         <activity
             android:name=".SignUp" android:screenOrientation="portrait"
-            android:parentActivityName=".LogIn" android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:parentActivityName=".LogIn"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

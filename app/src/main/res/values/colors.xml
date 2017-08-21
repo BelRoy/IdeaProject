@@ -11,11 +11,11 @@
     <color name="downloads">#00a8af</color>
 
 
-    <color name="lbl_email">#000000</color>
-    <color name="input_login">#0a0a0a</color>
-    <color name="input_register">#000000</color>
-    <color name="input_login_hint">#000000</color>
-    <color name="input_register_hint">#000000</color>
+    <color name="lbl_email">#ffffff</color>
+    <color name="input_login">#ffffff</color>
+    <color name="input_register">#ffffff</color>
+    <color name="input_login_hint">#fdfdfd</color>
+    <color name="input_register_hint">#ffffff</color>
     <color name="btn_login_register">#2196F3</color>
     <color name="btn_register">#ffffff</color>
     <color name="btn_logut">#ff6861</color>

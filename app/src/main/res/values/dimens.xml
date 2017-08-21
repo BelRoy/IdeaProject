@@ -14,4 +14,11 @@
     <dimen name="txt_lst">21sp</dimen>
     <dimen name="pad_lst">10dp</dimen>
     <dimen name="rl_pad">10dp</dimen>
+    <dimen name="head1">10dp</dimen>
+    <dimen name="head0">14dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="elev">4dp</dimen>
+    <dimen name="nav_drawer_width">264dp</dimen>
+    <dimen name="floating_height">650dp</dimen>
+    <dimen name="floating_width">500dp</dimen>
 </resources>
