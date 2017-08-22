@@ -50,5 +50,6 @@
     <string name="about_source_label">Source code</string>
     <string name="about_libraries_label">Used libraries</string>
     <string name="aboutme">UX / UI Designer\n Mobile Software Developer\n QA Engineer</string>
+    <string name="refresh">Refresh</string>
 
 </resources>

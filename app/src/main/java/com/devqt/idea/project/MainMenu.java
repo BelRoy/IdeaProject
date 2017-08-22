@@ -1,230 +1,115 @@
 package com.devqt.idea.project;
 
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
-import android.widget.LinearLayout;
 
+import com.devqt.idea.project.drawer.FragmentDrawer;
 import com.devqt.idea.project.fragments.AndroidFragment;
 import com.devqt.idea.project.fragments.ArduinoFragment;
 import com.devqt.idea.project.fragments.LegoFragment;
 import com.devqt.idea.project.fragments.MaxFragment;
 import com.devqt.idea.project.fragments.STLFragment;
-import com.google.firebase.auth.FirebaseAuth;
 
 
-public class MainMenu  extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainMenu  extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
-    private static final String SELECTED_ITEM_ID = "SELECTED_ITEM_ID";
-    private final Handler mDrawerHandler = new Handler();
-    private DrawerLayout mDrawerLayout;
-    private int mPrevSelectedId;
-    private NavigationView mNavigationView;
-    public int mSelectedId;
+    private static String TAG = MainMenu.class.getSimpleName();
+
     private Toolbar mToolbar;
+    private FragmentDrawer drawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_menu);
+        setContentView(R.layout.action_menu);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-        assert mNavigationView != null;
-        mNavigationView.setNavigationItemSelectedListener(this);
-
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,
-                mDrawerLayout, mToolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close)
-
-        {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                super.onDrawerSlide(drawerView, 0);
-            }
-
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, 0);
-            }
-
-            private void signOut()
-            {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MainMenu.this, LogIn.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        };
+        drawerFragment = (FragmentDrawer)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        drawerFragment.setDrawerListener(this);
 
 
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
-
-        mDrawerToggle.syncState();
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        mSelectedId = mNavigationView.getMenu().getItem(prefs.getInt("default_view", 0)).getItemId();
-        mSelectedId = savedInstanceState == null ? mSelectedId : savedInstanceState.getInt(SELECTED_ITEM_ID);
-        mPrevSelectedId = mSelectedId;
-        mNavigationView.getMenu().findItem(mSelectedId).setChecked(true);
-
-        if (savedInstanceState == null) {
-            mDrawerHandler.removeCallbacksAndMessages(null);
-            mDrawerHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    navigate(mSelectedId);
-                }
-            }, 250);
-
-            boolean openDrawer = prefs.getBoolean("open_drawer", false);
-
-            if (openDrawer)
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            else
-                mDrawerLayout.closeDrawers();
-        }
+      //  displayView(0);
     }
 
-    public void switchFragment(int itemId) {
-        mSelectedId = mNavigationView.getMenu().getItem(itemId).getItemId();
-        mNavigationView.getMenu().findItem(mSelectedId).setChecked(true);
-        mDrawerHandler.removeCallbacksAndMessages(null);
-        mDrawerHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                navigate(mSelectedId);
-            }
-        }, 250);
-        mDrawerLayout.closeDrawers();
-    }
-
-    private void navigate(final int itemId) {
-        final View elevation = findViewById(R.id.elevation);
-        Fragment navFragment = null;
-        switch (itemId) {
-            case R.id.nav_1:
-                mPrevSelectedId = itemId;
-                setTitle(R.string.android);
-                navFragment = new AndroidFragment();
-                break;
-            case R.id.nav_2:
-                mPrevSelectedId = itemId;
-                setTitle(R.string.arduino);
-                navFragment = new ArduinoFragment();
-                break;
-            case R.id.nav_3:
-                mPrevSelectedId = itemId;
-                setTitle(R.string.lego);
-                navFragment = new LegoFragment();
-                break;
-            case R.id.nav_4:
-                mPrevSelectedId = itemId;
-                setTitle(R.string.stl);
-                navFragment = new STLFragment();
-                break;
-            case R.id.nav_5:
-                mPrevSelectedId = itemId;
-                setTitle(R.string.a3dmax);
-                navFragment = new MaxFragment();
-                break;
-            //case R.id.nav_6:
-            //startActivity(new Intent(this, SettingsActivity.class));
-            //mNavigationView.getMenu().findItem(mPrevSelectedId).setChecked(true);
-            //return;
-            case R.id.nav_7:
-                startActivity(new Intent(this, AboutMe.class));
-                mNavigationView.getMenu().findItem(mPrevSelectedId).setChecked(true);
-                return;
-            /*case R.id.nav_8:
-                signOut(); finish();
-                return;*/
-        }
-
-        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(4));
-
-        if (navFragment != null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            try {
-                transaction.replace(R.id.content_frame, navFragment).commit();
-
-
-                if (elevation != null) {
-                    params.topMargin = navFragment instanceof ArduinoFragment ? dp(48) : 0;
-
-                    Animation a = new Animation() {
-                        @Override
-                        protected void applyTransformation(float interpolatedTime, Transformation t) {
-                            elevation.setLayoutParams(params);
-                        }
-                    };
-                    a.setDuration(150);
-                    elevation.startAnimation(a);
-                }
-            } catch (IllegalStateException ignored) {
-            }
-        }
-    }
-
-    public int dp(float value) {
-        float density = getApplicationContext().getResources().getDisplayMetrics().density;
-
-        if (value == 0) {
-            return 0;
-        }
-        return (int) Math.ceil(density * value);
-    }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-        menuItem.setChecked(true);
-        mSelectedId = menuItem.getItemId();
-        mDrawerHandler.removeCallbacksAndMessages(null);
-        mDrawerHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                navigate(mSelectedId);
-            }
-        }, 250);
-        mDrawerLayout.closeDrawers();
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_ITEM_ID, mSelectedId);
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+
+        if (id == R.id.action_refresh) {
+            return true;
+        }
+
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+    public void onDrawerItemSelected(View view, int position) {
+        displayView(position);
+    }
+
+    private void displayView(int position) {
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
+        switch (position) {
+            case 0:
+                fragment = new AndroidFragment();
+                title = getString(R.string.android);
+                break;
+            case 1:
+                fragment = new ArduinoFragment();
+                title = getString(R.string.arduino);
+                break;
+            case 2:
+                fragment = new LegoFragment();
+                title = getString(R.string.lego);
+                break;
+            case 3:
+                fragment = new STLFragment();
+                title = getString(R.string.stl);
+                break;
+            case 4:
+                fragment = new MaxFragment();
+                title = getString(R.string.a3dmax);
+                break;
+            default:
+                break;
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.commit();
+
+
+            getSupportActionBar().setTitle(title);
         }
     }
 }

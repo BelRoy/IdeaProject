@@ -6,4 +6,5 @@
     <dimen name="head1">10dp</dimen>
     <dimen name="head0">14dp</dimen>
     <dimen name="elev">4dp</dimen>
+    <dimen name="txt_15">15dp</dimen>
 </resources>
