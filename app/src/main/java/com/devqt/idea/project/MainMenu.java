@@ -1,6 +1,7 @@
 package com.devqt.idea.project;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,7 @@ import com.devqt.idea.project.fragments.ArduinoFragment;
 import com.devqt.idea.project.fragments.LegoFragment;
 import com.devqt.idea.project.fragments.MaxFragment;
 import com.devqt.idea.project.fragments.STLFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainMenu  extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -43,8 +45,23 @@ public class MainMenu  extends AppCompatActivity implements FragmentDrawer.Fragm
         drawerFragment.setDrawerListener(this);
 
 
-      //  displayView(0);
+
+//        displayView(0);
     }
+    private void signOut()
+    {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MainMenu.this, LogIn.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+    public void Seet()
+    {
+        Intent intent = new Intent(MainMenu.this, Settings.class);
+        startActivity(intent) ;
+    }
+
 
 
     @Override
@@ -62,9 +79,14 @@ public class MainMenu  extends AppCompatActivity implements FragmentDrawer.Fragm
 
         if (id == R.id.action_refresh) {
             return true;
+
+
+        if (id == R.id.exit) {
+                    signOut(); finish();
+
+                    return true;}
+
         }
-
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -80,23 +102,23 @@ public class MainMenu  extends AppCompatActivity implements FragmentDrawer.Fragm
         switch (position) {
             case 0:
                 fragment = new AndroidFragment();
-                title = getString(R.string.android);
+              //  title = getString(R.string.android);
                 break;
             case 1:
                 fragment = new ArduinoFragment();
-                title = getString(R.string.arduino);
+               // title = getString(R.string.arduino);
                 break;
             case 2:
                 fragment = new LegoFragment();
-                title = getString(R.string.lego);
+           //     title = getString(R.string.lego);
                 break;
             case 3:
                 fragment = new STLFragment();
-                title = getString(R.string.stl);
+            //    title = getString(R.string.stl);
                 break;
             case 4:
                 fragment = new MaxFragment();
-                title = getString(R.string.a3dmax);
+           //     title = getString(R.string.a3dmax);
                 break;
             default:
                 break;

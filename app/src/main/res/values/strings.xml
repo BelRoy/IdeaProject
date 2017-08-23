@@ -36,7 +36,7 @@
     <string name="about">About Me</string>
 
     <string-array name="screen_array" >
-        <item>Android</item>
+        <item>Android </item>
         <item>Arduino</item>
         <item>LEGO</item>
         <item>STL</item>

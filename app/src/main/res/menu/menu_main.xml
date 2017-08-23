@@ -1,57 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_1"
-            android:icon="@drawable/android_ico"
-            android:title="@string/android" />
-        <item
-            android:id="@+id/nav_2"
-            android:icon="@drawable/arduino_ico"
-            android:title="@string/arduino" />
-        <item
-            android:id="@+id/nav_3"
-            android:icon="@drawable/lego_ico"
-            android:title="@string/lego" />
-        <item
-            android:id="@+id/nav_4"
-            android:icon="@drawable/ic_stl"
-            android:title="@string/stl" />
-        <item
-            android:id="@+id/nav_5"
-            android:icon="@drawable/ic_max"
-            android:title="@string/a3dmax" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainMenu">
 
-    </group>
 
-    <item android:title="@string/m_s">
-        <menu>
-            <group android:checkableBehavior="none">
-                <item
-                    android:checkable="true"
-                    android:id="@+id/nav_6"
+
+     <item
+
+                    android:id="@+id/setting"
                     android:icon="@drawable/ic_nav_settings"
-                    android:title="@string/settings" />
-                <item
-                    android:checkable="true"
-                    android:id="@+id/nav_7"
-                    android:icon="@drawable/about"
-                    android:title="@string/about" />
-                <item
-                    android:checkable="true"
-                    android:id="@+id/nav_8"
-                    android:icon="@drawable/exit"
-                    android:title="@string/exit" />
-            </group>
-        </menu>
-    </item>
+                    android:title="@string/settings"
+                    app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_refresh"
-        android:title="@string/refresh"
-        android:orderInCategory="100"
-        android:icon="@drawable/action_refresh"
-        app:showAsAction="ifRoom" />
+
+                    android:id="@+id/exit"
+                    android:icon="@drawable/exit"
+                    android:title="@string/exit"
+                    app:showAsAction="ifRoom"/>
+
+
+    <item
+                     android:id="@+id/action_refresh"
+                     android:title="@string/refresh"
+                     android:orderInCategory="100"
+                     android:icon="@drawable/action_refresh"
+                     app:showAsAction="ifRoom" />
 
 </menu>
