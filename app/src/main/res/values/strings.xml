@@ -35,7 +35,7 @@
     <string name="m_s">Menu settings</string>
     <string name="about">About Me</string>
 
-    <string-array name="screen_array" >
+    <string-array name="screen_array">
         <item>Android </item>
         <item>Arduino</item>
         <item>LEGO</item>
@@ -51,5 +51,10 @@
     <string name="about_libraries_label">Used libraries</string>
     <string name="aboutme">UX / UI Designer\n Mobile Software Developer\n QA Engineer</string>
     <string name="refresh">Refresh</string>
+    <string name="title_activity_main">Idea Projects</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="items">Items</string>
 
 </resources>
