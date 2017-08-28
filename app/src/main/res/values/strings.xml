@@ -56,5 +56,17 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="items">Items</string>
+    <string name="load">DOWNLOAD</string>
+
+    <string name="me">Vladyslav Belous
+        \n
+
+      \n 09 June 1993
+        \n
+
+      \n  Education: PhD Student
+        \n
+
+\n Specificity: Software developer, \n QA/QC Engineer, \n UI/UX Designer, \n Cyber Security Engineer</string>
 
 </resources>

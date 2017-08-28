@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorContent">
+
+
+
+    <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/je"
+    android:id="@+id/viewImg"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/me"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/viewImg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="@dimen/txt_20"
+        android:textColor="@color/colorPrimaryDark"
+        android:nestedScrollingEnabled="true"
+        android:layout_alignRight="@+id/viewImg"
+        android:layout_alignEnd="@+id/viewImg"
+        android:layout_alignParentBottom="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/viewImg"
+        android:layout_toEndOf="@+id/viewImg">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/facebook"
+            android:src="@drawable/facebook"
+            android:layout_below="@+id/google"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/google"
+            android:src="@drawable/google"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/instagram"
+            android:src="@drawable/instagram"
+            android:layout_below="@+id/facebook"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/github"
+            android:src="@drawable/github"
+            android:layout_below="@+id/instagram"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linkdn"
+            android:src="@drawable/linkdn"
+            android:layout_below="@+id/github"
+            android:layout_alignLeft="@+id/github"
+            android:layout_alignStart="@+id/github" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -11,4 +11,5 @@
     <dimen name="head0">14dp</dimen>
     <dimen name="elev">4dp</dimen>
     <dimen name="txt_15">15dp</dimen>
+    <dimen name="txt_20">20dp</dimen>
 </resources>

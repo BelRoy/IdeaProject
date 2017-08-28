@@ -1,8 +1,10 @@
-package com.devqt.idea.project;
+package com.devqt.idea.project.etc;
 
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.devqt.idea.project.R;
 
 public class Settings extends Activity {
 

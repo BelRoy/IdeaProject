@@ -35,7 +35,7 @@
                 android:value=".LogIn" />
         </activity>
                <activity
-            android:name=".Settings"
+            android:name=".etc.Settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".drawer.MainMenu"

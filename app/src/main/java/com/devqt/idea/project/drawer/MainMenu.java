@@ -3,6 +3,7 @@ package com.devqt.idea.project.drawer;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.devqt.idea.project.R;
+import com.devqt.idea.project.etc.AboutMe;
 import com.devqt.idea.project.fragments.AndroidFragment;
 
 public class MainMenu extends AppCompatActivity
@@ -34,6 +36,17 @@ public class MainMenu extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        if (savedInstanceState == null) {
+            Fragment fragment = null;
+            Class fragmentClass = null;
+            fragmentClass = AndroidFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override
@@ -71,9 +84,11 @@ public class MainMenu extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment = null;
         Class fragmentClass = null;
+
         int id = item.getItemId();
 
         if (id == R.id.android) {
+
             fragmentClass = AndroidFragment.class;
 
         } else if (id == R.id.arduino) {
@@ -89,6 +104,7 @@ public class MainMenu extends AppCompatActivity
         }
          else if (id == R.id.about_me) {
 
+            fragmentClass = AboutMe.class;
         }
          else if (id == R.id.exit) {
 
@@ -99,6 +115,9 @@ public class MainMenu extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -7,23 +7,23 @@
           <item
             android:id="@+id/android"
             android:icon="@drawable/android_ico"
-            android:title="@string/android"/>
+            android:title="Android"/>
          <item
             android:id="@+id/arduino"
             android:icon="@drawable/arduino_ico"
-            android:title="@string/arduino"/>
+            android:title="Arduino"/>
           <item
             android:id="@+id/lego"
             android:icon="@drawable/lego_ico"
-            android:title="@string/lego"/>
+            android:title="Lego"/>
          <item
             android:id="@+id/stl"
             android:icon="@drawable/ic_stl"
-            android:title="@string/stl"/>
+            android:title="STL"/>
          <item
             android:id="@+id/max"
             android:icon="@drawable/ic_max"
-            android:title="@string/a3dmax"/>
+            android:title="3D MAX"/>
      <!--</group>-->
     </menu>
 </item>
