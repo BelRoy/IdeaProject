@@ -7,4 +7,10 @@
         android:title="@string/refresh"
         app:showAsAction="ifRoom"
         android:icon="@drawable/action_refresh"/>
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="100"
+        android:title="@string/exit"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/exit"/>
 </menu>

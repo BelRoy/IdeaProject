@@ -31,4 +31,9 @@
     <string name="refresh">Refresh</string>
     <string name="items">Items</string>
     <string name="load">DOWNLOAD</string>
+    <string name="basic">Basic</string>
+    <string name="advanced">Advanced</string>
+    <string name="chng_mail">Change E-mail</string>
+    <string name="chng_pass">Change password</string>
+    <string name="del_akk">Delete Account</string>
 </resources>

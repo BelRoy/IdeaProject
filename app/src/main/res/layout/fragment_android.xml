@@ -6,7 +6,7 @@
     android:background="@color/colorContent"
     tools:context="com.devqt.idea.project.fragments.AndroidFragment">
 
-
+<include layout="@layout/items_list"/>
 
 
 

@@ -1,5 +1,6 @@
 package com.devqt.idea.project.drawer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.devqt.idea.project.LogIn;
 import com.devqt.idea.project.R;
 import com.devqt.idea.project.etc.AboutMe;
+import com.devqt.idea.project.etc.Settings;
 import com.devqt.idea.project.fragments.AndroidFragment;
+import com.devqt.idea.project.fragments.ArduinoFragment;
+import com.devqt.idea.project.fragments.LegoFragment;
+import com.devqt.idea.project.fragments.MaxFragment;
+import com.devqt.idea.project.fragments.STLFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +57,15 @@ public class MainMenu extends AppCompatActivity
         }
     }
 
+    private void signOut()
+    {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MainMenu.this, LogIn.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -75,6 +92,10 @@ public class MainMenu extends AppCompatActivity
         if (id == R.id.action_refresh) {
             return true;
         }
+        if (id == R.id.exit) {
+            signOut(); finish();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -92,22 +113,28 @@ public class MainMenu extends AppCompatActivity
             fragmentClass = AndroidFragment.class;
 
         } else if (id == R.id.arduino) {
+            fragmentClass = ArduinoFragment.class;
 
         } else if (id == R.id.lego) {
 
+            fragmentClass = LegoFragment.class;
+
         } else if (id == R.id.stl) {
+
+            fragmentClass = STLFragment.class;
 
         } else if (id == R.id.max) {
 
+            fragmentClass = MaxFragment.class;
+
         } else if (id == R.id.sett) {
+
+            fragmentClass = Settings.class;
 
         }
          else if (id == R.id.about_me) {
 
             fragmentClass = AboutMe.class;
-        }
-         else if (id == R.id.exit) {
-
         }
 
         try {

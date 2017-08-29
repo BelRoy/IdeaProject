@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorContent">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/include" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/include"
+
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -32,41 +31,43 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Small Text"
-            android:id="@+id/rate_old"
-            android:layout_below="@+id/name_app"
-            android:layout_alignLeft="@+id/name_app"
-            android:layout_alignStart="@+id/name_app" />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/load"
             android:id="@+id/download"
             android:background="@drawable/shape"
-            android:layout_below="@+id/rate_old"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/name_app" />
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/download"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/download">
+
+            <VideoView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/info_video"
+                android:scrollbars="vertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/info_app" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="217dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
                 android:id="@+id/info_app"
-                android:layout_gravity="left|top" />
-        </FrameLayout>
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
 
     </RelativeLayout>
 

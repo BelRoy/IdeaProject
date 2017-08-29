@@ -68,5 +68,10 @@
         \n
 
 \n Specificity: Software developer, \n QA/QC Engineer, \n UI/UX Designer, \n Cyber Security Engineer</string>
+    <string name="basic">Basic</string>
+    <string name="advanced">Advanced</string>
+    <string name="chng_mail">Change E-mail</string>
+    <string name="chng_pass">Change password</string>
+    <string name="del_akk">Delete Account</string>
 
 </resources>
