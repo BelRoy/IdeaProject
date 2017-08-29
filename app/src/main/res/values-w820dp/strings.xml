@@ -17,4 +17,6 @@
     <string name="chng_mail">Change E-mail</string>
     <string name="chng_pass">Change password</string>
     <string name="del_akk">Delete Account</string>
+    <string name="lang">Change language</string>
+    <string name="cashe">Clear cache</string>
 </resources>

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/name_list"
+        android:id="@+id/name_app"
         android:layout_gravity="right"
         android:textColor="@android:color/background_dark" />
 </LinearLayout>

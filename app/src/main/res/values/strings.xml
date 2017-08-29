@@ -73,5 +73,23 @@
     <string name="chng_mail">Change E-mail</string>
     <string name="chng_pass">Change password</string>
     <string name="del_akk">Delete Account</string>
+    <string name="lang">Change language</string>
+
+    <string name="LangTitle">Language</string>
+    <string name="LangDialogTitle">Choose language:</string>
+    <string name="LangSummary">Language app</string>
+    <string name="cashe">Clear cache</string>
+
+    <string-array name="entries_lang">
+        <item>Language app</item>
+        <item>English</item>
+        <item>Russian</item>
+    </string-array>
+    <string-array name="entryvalues_lang">
+        <item>default</item>
+        <item>en</item>
+        <item>ru</item>
+    </string-array>
+
 
 </resources>

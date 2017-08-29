@@ -52,19 +52,19 @@
             <VideoView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/info_video"
+                android:id="@+id/videoApp"
                 android:scrollbars="vertical"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_above="@+id/info_app" />
+                android:layout_above="@+id/description" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="217dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
-                android:id="@+id/info_app"
+                android:id="@+id/description"
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
