@@ -3,8 +3,6 @@ package com.devqt.idea.project.drawer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,7 +28,7 @@ public class MainMenu extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_android);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,18 +42,10 @@ public class MainMenu extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (savedInstanceState == null) {
-            Fragment fragment = null;
-            Class fragmentClass = null;
-            fragmentClass = AndroidFragment.class;
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
-        }
+
     }
+
 
     private void signOut()
     {
@@ -103,47 +93,37 @@ public class MainMenu extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Fragment fragment = null;
-        Class fragmentClass = null;
+        int id=item.getItemId();
+        switch (id) {
 
-        int id = item.getItemId();
-
-        if (id == R.id.android) {
-
-            fragmentClass = AndroidFragment.class;
-
-        } else if (id == R.id.arduino) {
-            fragmentClass = ArduinoFragment.class;
-
-        } else if (id == R.id.lego) {
-
-            fragmentClass = LegoFragment.class;
-
-        } else if (id == R.id.stl) {
-
-            fragmentClass = STLFragment.class;
-
-        } else if (id == R.id.max) {
-
-            fragmentClass = MaxFragment.class;
-
-        } else if (id == R.id.sett) {
-
-            fragmentClass = Settings.class;
-
+            case R.id.android:
+                Intent h = new Intent(MainMenu.this, AndroidFragment.class);
+                startActivity(h);
+                break;
+            case R.id.arduino:
+                Intent i = new Intent(MainMenu.this, ArduinoFragment.class);
+                startActivity(i);
+                break;
+            case R.id.lego:
+                Intent g = new Intent(MainMenu.this, LegoFragment.class);
+                startActivity(g);
+                break;
+            case R.id.stl:
+                Intent s = new Intent(MainMenu.this, STLFragment.class);
+                startActivity(s);
+            case R.id.max:
+                Intent t = new Intent(MainMenu.this, MaxFragment.class);
+                startActivity(t);
+                break;
+            case R.id.about_me:
+                Intent m = new Intent(MainMenu.this, AboutMe.class);
+                startActivity(m);
+                break;
+            case R.id.sett:
+                Intent st = new Intent(MainMenu.this, Settings.class);
+                startActivity(st);
+                break;
         }
-         else if (id == R.id.about_me) {
-
-            fragmentClass = AboutMe.class;
-        }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

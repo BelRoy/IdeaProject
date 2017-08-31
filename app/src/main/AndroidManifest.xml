@@ -34,7 +34,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LogIn" />
         </activity>
-               <activity
+            <activity
             android:name=".etc.Settings"
             android:screenOrientation="portrait" />
         <activity
@@ -44,6 +44,24 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".fragments.AndroidFragment"
+            android:label="@string/android"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity
+            android:name=".Gallery"
+            android:label="@string/arduino"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Slideshow"
+            android:label="@string/lego"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Tools"
+            android:label="@string/stl"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>-->
     </application>
 
 </manifest>
