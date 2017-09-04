@@ -90,6 +90,14 @@
         <item>en</item>
         <item>ru</item>
     </string-array>
+    <string name="title_activity_android_fragment">AndroidFragment</string>
+    <string name="title_activity_arduino_fragment">ArduinoFragment</string>
+    <string name="title_activity_lego_fragment">LegoFragment</string>
+    <string name="title_activity_stlframent">STLFrament</string>
+    <string name="title_activity_max_fragment">MaxFragment</string>
+    <string name="title_activity_about_me">AboutMe</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_main_menu">MainMenu</string>
 
 
 </resources>

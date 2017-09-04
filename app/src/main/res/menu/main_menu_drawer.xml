@@ -2,31 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single"/>
-        <!--<item android:title="@string/items">-->
-        <menu>
-          <item
+    <!--<item android:title="@string/items">-->
+    <menu>
+        <item
             android:id="@+id/android"
             android:icon="@drawable/android_ico"
             android:title="Android"/>
-         <item
+        <item
             android:id="@+id/arduino"
             android:icon="@drawable/arduino_ico"
             android:title="Arduino"/>
-          <item
+        <item
             android:id="@+id/lego"
             android:icon="@drawable/lego_ico"
             android:title="Lego"/>
-         <item
+        <item
             android:id="@+id/stl"
             android:icon="@drawable/ic_stl"
             android:title="STL"/>
-         <item
+        <item
             android:id="@+id/max"
             android:icon="@drawable/ic_max"
             android:title="3D MAX"/>
-     <!--</group>-->
+        <!--</group>-->
     </menu>
-<!--</item>-->
+    <!--</item>-->
 
 
     <item android:title="@string/settings">
