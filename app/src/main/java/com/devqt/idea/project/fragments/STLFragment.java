@@ -2,6 +2,7 @@ package com.devqt.idea.project.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -85,7 +86,7 @@ public class STLFragment extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -94,29 +95,37 @@ public class STLFragment extends AppCompatActivity
             case R.id.android:
                 Intent h = new Intent(STLFragment.this, AndroidFragment.class);
                 startActivity(h);
+                finish();
                 break;
             case R.id.arduino:
                 Intent i = new Intent(STLFragment.this, ArduinoFragment.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.lego:
                 Intent g = new Intent(STLFragment.this, LegoFragment.class);
                 startActivity(g);
+                finish();
                 break;
             case R.id.stl:
                 Intent s = new Intent(STLFragment.this, STLFragment.class);
                 startActivity(s);
+                finish();
+                break;
             case R.id.max:
                 Intent t = new Intent(STLFragment.this, MaxFragment.class);
                 startActivity(t);
+                finish();
                 break;
             case R.id.about_me:
                 Intent m = new Intent(STLFragment.this, AboutMe.class);
                 startActivity(m);
+                finish();
                 break;
             case R.id.sett:
                 Intent st = new Intent(STLFragment.this, Settings.class);
                 startActivity(st);
+                finish();
                 break;
         }
 

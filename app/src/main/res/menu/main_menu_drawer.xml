@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single"/>
-    <!--<item android:title="@string/items">-->
-    <menu>
+        <group android:checkableBehavior="single">
         <item
             android:id="@+id/android"
-            android:icon="@drawable/android_ico"
-            android:title="Android"/>
+            android:title="@string/title_activity_android_fragment"
+            android:icon="@drawable/android_ico"/>
         <item
             android:id="@+id/arduino"
             android:icon="@drawable/arduino_ico"
-            android:title="Arduino"/>
+            android:title="@string/title_activity_arduino_fragment"/>
         <item
             android:id="@+id/lego"
             android:icon="@drawable/lego_ico"
-            android:title="Lego"/>
+            android:title="@string/title_activity_lego_fragment"/>
         <item
             android:id="@+id/stl"
             android:icon="@drawable/ic_stl"
-            android:title="STL"/>
+            android:title="@string/title_activity_stlframent"/>
         <item
             android:id="@+id/max"
             android:icon="@drawable/ic_max"
-            android:title="3D MAX"/>
-        <!--</group>-->
-    </menu>
-    <!--</item>-->
+            android:title="@string/title_activity_max_fragment"/>
+
+        </group>
+
+        <item android:title="@string/other">
+            <menu>
+                <group android:checkableBehavior="none">
 
 
-    <item android:title="@string/settings">
-        <menu>
             <item
                 android:id="@+id/sett"
                 android:icon="@drawable/ic_nav_settings"
@@ -40,7 +39,8 @@
                 android:icon="@drawable/about"
                 android:title="@string/about" />
 
-        </menu>
-    </item>
+                </group>
+            </menu>
+        </item>
 
-</menu>
+    </menu>

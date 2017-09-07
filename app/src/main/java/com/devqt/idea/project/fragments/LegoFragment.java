@@ -92,29 +92,37 @@ public class LegoFragment extends AppCompatActivity
             case R.id.android:
                 Intent h = new Intent(LegoFragment.this, AndroidFragment.class);
                 startActivity(h);
+                finish();
                 break;
             case R.id.arduino:
                 Intent i = new Intent(LegoFragment.this, ArduinoFragment.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.lego:
                 Intent g = new Intent(LegoFragment.this, LegoFragment.class);
                 startActivity(g);
+                finish();
                 break;
             case R.id.stl:
                 Intent s = new Intent(LegoFragment.this, STLFragment.class);
                 startActivity(s);
+                finish();
+                break;
             case R.id.max:
                 Intent t = new Intent(LegoFragment.this, MaxFragment.class);
                 startActivity(t);
+                finish();
                 break;
             case R.id.about_me:
                 Intent m = new Intent(LegoFragment.this, AboutMe.class);
                 startActivity(m);
+                finish();
                 break;
             case R.id.sett:
                 Intent st = new Intent(LegoFragment.this, Settings.class);
                 startActivity(st);
+                finish();
                 break;
         }
 

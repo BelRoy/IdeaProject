@@ -25,6 +25,7 @@
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="exit">Exit</string>
     <string name="prof">Profile</string>
+    <string name="other">Other</string>
 
     <string name="action_settings">Settings</string>
     <string name="drawer_open">Open Drawer Navigation</string>
@@ -90,14 +91,14 @@
         <item>en</item>
         <item>ru</item>
     </string-array>
-    <string name="title_activity_android_fragment">AndroidFragment</string>
-    <string name="title_activity_arduino_fragment">ArduinoFragment</string>
-    <string name="title_activity_lego_fragment">LegoFragment</string>
-    <string name="title_activity_stlframent">STLFrament</string>
-    <string name="title_activity_max_fragment">MaxFragment</string>
-    <string name="title_activity_about_me">AboutMe</string>
+    <string name="title_activity_android_fragment">Android</string>
+    <string name="title_activity_arduino_fragment">Arduino</string>
+    <string name="title_activity_lego_fragment">Lego</string>
+    <string name="title_activity_stlframent">STL</string>
+    <string name="title_activity_max_fragment">3D Max</string>
+    <string name="title_activity_about_me">About Me</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="title_activity_main_menu">Home</string>
 
 
 </resources>
