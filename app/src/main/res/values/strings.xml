@@ -102,6 +102,7 @@
     <string name="title_activity_main_menu">Home</string>
     <string name="mbot">mBot</string>
     <string name="title_activity_m_bot_fragment">mBot</string>
+    <string name="action_search">Search</string>
 
 
 </resources>

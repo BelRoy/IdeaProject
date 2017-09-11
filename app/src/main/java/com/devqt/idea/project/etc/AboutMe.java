@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.devqt.idea.project.LogIn;
@@ -45,9 +47,24 @@ public class AboutMe extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        TextView textView = (TextView) findViewById(R.id.mee);
+        TextView textView = (TextView) findViewById(R.id.me);
         Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/megadeth.ttf");
         textView.setTypeface(typeFace);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Email = new Intent(Intent.ACTION_SEND);
+                Email.setType("text/email");
+                Email.putExtra(Intent.EXTRA_EMAIL,
+                        new String[]{"develop.qt@gmail.com"});
+                Email.putExtra(Intent.EXTRA_SUBJECT,
+                        "Add your Subject");
+                Email.putExtra(Intent.EXTRA_TEXT, "Dear Developer Name," + "");
+                startActivity(Intent.createChooser(Email, "Send Feedback:"));
+            }
+        });
     }
 
     @Override

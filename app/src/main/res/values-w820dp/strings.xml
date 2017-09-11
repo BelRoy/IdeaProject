@@ -20,4 +20,5 @@
     <string name="lang">Change language</string>
     <string name="cashe">Clear cache</string>
     <string name="mbot">mBot</string>
+    <string name="action_search">Search</string>
 </resources>
