@@ -37,6 +37,8 @@ public class STLFragment extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
+
     }
 
     @Override
@@ -115,6 +117,11 @@ public class STLFragment extends AppCompatActivity
             case R.id.max:
                 Intent t = new Intent(STLFragment.this, MaxFragment.class);
                 startActivity(t);
+                finish();
+                break;
+            case R.id.mbot:
+                Intent b = new Intent(STLFragment.this, mBotFragment.class);
+                startActivity(b);
                 finish();
                 break;
             case R.id.about_me:

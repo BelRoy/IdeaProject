@@ -18,15 +18,16 @@ import com.devqt.idea.project.etc.AboutMe;
 import com.devqt.idea.project.etc.Settings;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MaxFragment extends AppCompatActivity
+public class mBotFragment extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.max_fragment);
+        setContentView(R.layout.m_bot_fragment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -60,7 +61,7 @@ public class MaxFragment extends AppCompatActivity
     private void signOut()
     {
         FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(MaxFragment.this, LogIn.class);
+        Intent intent = new Intent(mBotFragment.this, LogIn.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
@@ -82,7 +83,6 @@ public class MaxFragment extends AppCompatActivity
             return true;
         }
 
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -91,45 +91,46 @@ public class MaxFragment extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         switch (id) {
 
             case R.id.android:
-                Intent h = new Intent(MaxFragment.this, AndroidFragment.class);
+                Intent h = new Intent(mBotFragment.this, AndroidFragment.class);
                 startActivity(h);
                 finish();
                 break;
             case R.id.arduino:
-                Intent i = new Intent(MaxFragment.this, ArduinoFragment.class);
+                Intent i = new Intent(mBotFragment.this, ArduinoFragment.class);
                 startActivity(i);
                 finish();
                 break;
             case R.id.lego:
-                Intent g = new Intent(MaxFragment.this, LegoFragment.class);
+                Intent g = new Intent(mBotFragment.this, LegoFragment.class);
                 startActivity(g);
                 finish();
                 break;
             case R.id.stl:
-                Intent s = new Intent(MaxFragment.this, STLFragment.class);
+                Intent s = new Intent(mBotFragment.this, STLFragment.class);
                 startActivity(s);
                 finish();
                 break;
             case R.id.max:
-                Intent t = new Intent(MaxFragment.this, MaxFragment.class);
+                Intent t = new Intent(mBotFragment.this, MaxFragment.class);
                 startActivity(t);
                 finish();
                 break;
             case R.id.mbot:
-                Intent b = new Intent(MaxFragment.this, mBotFragment.class);
+                Intent b = new Intent(mBotFragment.this, mBotFragment.class);
                 startActivity(b);
                 finish();
                 break;
             case R.id.about_me:
-                Intent m = new Intent(MaxFragment.this, AboutMe.class);
+                Intent m = new Intent(mBotFragment.this, AboutMe.class);
                 startActivity(m);
                 finish();
                 break;
             case R.id.sett:
-                Intent st = new Intent(MaxFragment.this, Settings.class);
+                Intent st = new Intent(mBotFragment.this, Settings.class);
                 startActivity(st);
                 finish();
                 break;

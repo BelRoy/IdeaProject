@@ -1,6 +1,7 @@
 package com.devqt.idea.project.etc;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.devqt.idea.project.LogIn;
 import com.devqt.idea.project.R;
@@ -19,6 +21,7 @@ import com.devqt.idea.project.fragments.ArduinoFragment;
 import com.devqt.idea.project.fragments.LegoFragment;
 import com.devqt.idea.project.fragments.MaxFragment;
 import com.devqt.idea.project.fragments.STLFragment;
+import com.devqt.idea.project.fragments.mBotFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AboutMe extends AppCompatActivity
@@ -40,6 +43,11 @@ public class AboutMe extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
+
+        TextView textView = (TextView) findViewById(R.id.mee);
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/megadeth.ttf");
+        textView.setTypeface(typeFace);
     }
 
     @Override
@@ -112,6 +120,11 @@ public class AboutMe extends AppCompatActivity
             case R.id.stl:
                 Intent s = new Intent(AboutMe.this, STLFragment.class);
                 startActivity(s);
+                finish();
+                break;
+            case R.id.mbot:
+                Intent b = new Intent(AboutMe.this, mBotFragment.class);
+                startActivity(b);
                 finish();
                 break;
             case R.id.max:

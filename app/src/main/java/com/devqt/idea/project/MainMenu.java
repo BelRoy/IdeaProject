@@ -19,6 +19,7 @@ import com.devqt.idea.project.fragments.ArduinoFragment;
 import com.devqt.idea.project.fragments.LegoFragment;
 import com.devqt.idea.project.fragments.MaxFragment;
 import com.devqt.idea.project.fragments.STLFragment;
+import com.devqt.idea.project.fragments.mBotFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenu extends AppCompatActivity
@@ -41,6 +42,7 @@ public class MainMenu extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -116,6 +118,11 @@ public class MainMenu extends AppCompatActivity
             case R.id.max:
                 Intent t = new Intent(MainMenu.this, MaxFragment.class);
                 startActivity(t);
+                finish();
+                break;
+            case R.id.mbot:
+                Intent b = new Intent(MainMenu.this, mBotFragment.class);
+                startActivity(b);
                 finish();
                 break;
             case R.id.about_me:

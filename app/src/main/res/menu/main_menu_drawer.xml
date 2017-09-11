@@ -22,6 +22,10 @@
             android:id="@+id/max"
             android:icon="@drawable/ic_max"
             android:title="@string/title_activity_max_fragment"/>
+        <item
+            android:id="@+id/mbot"
+            android:icon="@drawable/mbot"
+            android:title="@string/mbot"/>
 
         </group>
 

@@ -35,6 +35,7 @@ public class LegoFragment extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -112,6 +113,11 @@ public class LegoFragment extends AppCompatActivity
             case R.id.max:
                 Intent t = new Intent(LegoFragment.this, MaxFragment.class);
                 startActivity(t);
+                finish();
+                break;
+            case R.id.mbot:
+                Intent b = new Intent(LegoFragment.this, mBotFragment.class);
+                startActivity(b);
                 finish();
                 break;
             case R.id.about_me:

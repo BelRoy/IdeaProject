@@ -19,6 +19,7 @@ import com.devqt.idea.project.fragments.ArduinoFragment;
 import com.devqt.idea.project.fragments.LegoFragment;
 import com.devqt.idea.project.fragments.MaxFragment;
 import com.devqt.idea.project.fragments.STLFragment;
+import com.devqt.idea.project.fragments.mBotFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Settings extends AppCompatActivity
@@ -41,6 +42,7 @@ public class Settings extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -119,6 +121,12 @@ public class Settings extends AppCompatActivity
         startActivity(t);
             finish();
         break;
+
+        case R.id.mbot:
+         Intent b = new Intent(Settings.this,mBotFragment.class);
+         startActivity(b);
+         finish();
+         break;
         case R.id.about_me:
         Intent m = new Intent(Settings.this, AboutMe.class);
         startActivity(m);
