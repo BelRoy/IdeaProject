@@ -6,17 +6,17 @@
         android:title="@string/action_search"
         android:orderInCategory="100"
         android:icon="@drawable/search"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_refresh"
         android:orderInCategory="100"
         android:title="@string/refresh"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:icon="@drawable/action_refresh"/>
     <item
         android:id="@+id/exit"
         android:orderInCategory="100"
         android:title="@string/exit"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:icon="@drawable/exit"/>
 </menu>

@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class AndroidFragment extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    final static  String DB_URL= "https://idea-projects-380e3.firebaseio.com/android";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
