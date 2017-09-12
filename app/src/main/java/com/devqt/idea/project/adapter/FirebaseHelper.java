@@ -1,77 +1,55 @@
 package com.devqt.idea.project.adapter;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseException;
-import com.google.firebase.database.DatabaseReference;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.devqt.idea.project.R;
 
 import java.util.ArrayList;
 
 
-public class FirebaseHelper {
 
+public class FirebaseHelper extends BaseAdapter {
 
-    DatabaseReference db;
-Boolean saved=null;
-        ArrayList<String> spacecrafts=new ArrayList<>();
+        ArrayList<Items> items=new ArrayList<>();
+        Context context;
 
-
-public FirebaseHelper(DatabaseReference db) {
-        this.db = db;
+        public FirebaseHelper(Context context,ArrayList<Items> art){
+                items=art;
+                this.context=context;
+        }
+        @Override
+        public int getCount() {
+                return items.size();
         }
 
+        @Override
+        public Object getItem(int position) {
+                return null;
+        }
 
-public Boolean save(Items items)
-        {
-        if(items==null)
-        {
-        saved=false;
-        }else
-        {
-        try
-        {
-        db.child("Android").push().setValue(items);
-        saved=true;
-        }catch (DatabaseException e)
-        {
-        e.printStackTrace();
-        saved=false;
+        @Override
+        public long getItemId(int position) {
+                return 0;
         }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+                LayoutInflater inflater= (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+                View view=inflater.inflate(R.layout.content_android_fragment,parent,false);
+
+                TextView txtName= (TextView) view.findViewById(R.id.nameTxt);
+             //   TextView icon= (TextView) view.findViewById(R.id.tv_art);
+
+                Items items1=items.get(position);
+
+                txtName.setText(items1.getName());
+              //  tv_art.setText(artist.getItems());
+                return view;
         }
-        return saved;
-        }
-//READ
-public ArrayList<String> retrieve()
-        {
-        db.addChildEventListener(new ChildEventListener() {
-@Override
-public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-        fetchData(dataSnapshot);
-        }
-@Override
-public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-        fetchData(dataSnapshot);
-        }
-@Override
-public void onChildRemoved(DataSnapshot dataSnapshot) {
-        }
-@Override
-public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-        }
-@Override
-public void onCancelled(DatabaseError databaseError) {
-        }
-        });
-        return spacecrafts;
-        }
-private void fetchData(DataSnapshot dataSnapshot)
-        {
-        spacecrafts.clear();
-        for (DataSnapshot ds : dataSnapshot.getChildren())
-        {
-        String name=ds.getValue(Items.class).getName();
-        spacecrafts.add(name);
-        }
-        }
-        }
+}

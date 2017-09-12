@@ -5,13 +5,15 @@ package com.devqt.idea.project.adapter;
 public class Items {
 
 
-    String name;
-    String icon;
-    String description;
-    String video;
+   private String name;
+   private String icon;
+   private String description;
+   private String video;
 
 
-    public Items() {}
+    /*private Items() {}*/
+
+
 
 
     public String getName() {
@@ -45,5 +47,9 @@ public class Items {
         this.icon = icon;
     }
 
+    /*String name;
+    String description;
+    String video;
+    String icon;*/
 
 }

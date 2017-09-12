@@ -1,5 +1,6 @@
 package com.devqt.idea.project.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,17 +12,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.devqt.idea.project.LogIn;
 import com.devqt.idea.project.R;
+import com.devqt.idea.project.adapter.FirebaseHelper;
+import com.devqt.idea.project.adapter.Items;
 import com.devqt.idea.project.etc.AboutMe;
 import com.devqt.idea.project.etc.Settings;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class AndroidFragment extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    final static  String DB_URL= "https://idea-projects-380e3.firebaseio.com/android";
+    ListView listView;
+    ProgressDialog progressDialog;
+    DatabaseReference databaseReference;
+    ArrayList<Items> andritem=new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +56,34 @@ public class AndroidFragment extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
+        listView= (ListView) findViewById(R.id.list_android);
+      progressDialog=new ProgressDialog(this);
+        databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("https://idea-projects-380e3.firebaseio.com/android");
+      progressDialog.setMessage("Please Wait, Loading Data From Server");
+       progressDialog.show();
+
+
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Items items=snapshot.getValue(Items.class);
+                    andritem.add(items);
+                }
+                FirebaseHelper adapter=new FirebaseHelper(getApplicationContext(),andritem);
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override

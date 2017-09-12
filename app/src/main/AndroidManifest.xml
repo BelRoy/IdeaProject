@@ -55,21 +55,28 @@
             android:label="@string/title_activity_max_fragment"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".fragments.mBotFragment"
+            android:label="@string/title_activity_m_bot_fragment"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
             android:name=".etc.AboutMe"
             android:label="@string/title_activity_about_me"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".etc.Settings"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".MainMenu"
             android:label="@string/title_activity_main_menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".fragments.mBotFragment"
-            android:label="@string/title_activity_m_bot_fragment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
     </application>
 
 </manifest>
