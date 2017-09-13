@@ -1,6 +1,5 @@
 package com.devqt.idea.project.fragments;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,33 +8,33 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.devqt.idea.project.LogIn;
 import com.devqt.idea.project.R;
-import com.devqt.idea.project.adapter.FirebaseHelper;
-import com.devqt.idea.project.adapter.Items;
+import com.devqt.idea.project.adapter.ItemsAdapter;
+import com.devqt.idea.project.adapter.ItemsModel;
 import com.devqt.idea.project.etc.AboutMe;
 import com.devqt.idea.project.etc.Settings;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AndroidFragment extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ListView listView;
-    ProgressDialog progressDialog;
-    DatabaseReference databaseReference;
-    ArrayList<Items> andritem=new ArrayList<>();
+    private RecyclerView recyclerView;
+    private List<ItemsModel> result;
+    private ItemsAdapter itemsAdapter;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
 
 
     @Override
@@ -45,6 +44,21 @@ public class AndroidFragment extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("android");
+
+
+        result = new ArrayList<>();
+        recyclerView = (RecyclerView) findViewById(R.id.items_list);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+
+        createResult();
+
+        itemsAdapter = new ItemsAdapter(result);
+        recyclerView.setAdapter(itemsAdapter);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -57,34 +71,36 @@ public class AndroidFragment extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        listView= (ListView) findViewById(R.id.list_android);
-      progressDialog=new ProgressDialog(this);
-        databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("https://idea-projects-380e3.firebaseio.com/android");
-      progressDialog.setMessage("Please Wait, Loading Data From Server");
-       progressDialog.show();
 
-
-
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                progressDialog.dismiss();
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    Items items=snapshot.getValue(Items.class);
-                    andritem.add(items);
-                }
-                FirebaseHelper adapter=new FirebaseHelper(getApplicationContext(),andritem);
-                listView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case 0:
+                break;
+
+            case 1:
+                break;
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void  createResult(){
+
+
+        for (int i = 0; i < 10; i++){
+
+            result.add(new ItemsModel("name","description","icon",""));
+        }
+
+    }
+
+
 
     @Override
     public void onBackPressed() {
