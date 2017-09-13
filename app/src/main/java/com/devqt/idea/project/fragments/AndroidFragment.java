@@ -35,6 +35,7 @@ public class AndroidFragment extends AppCompatActivity
     private ItemsAdapter itemsAdapter;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    final int N = 10;
 
 
     @Override
@@ -93,7 +94,7 @@ public class AndroidFragment extends AppCompatActivity
     private void  createResult(){
 
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < N; i++){
 
             result.add(new ItemsModel("name","description","icon",""));
         }

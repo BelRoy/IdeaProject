@@ -21,7 +21,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
 
     @Override
     public ItemsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ItemsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_layout, parent, false));
+        return new ItemsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.elements_row, parent, false));
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     class ItemsViewHolder extends RecyclerView.ViewHolder{
