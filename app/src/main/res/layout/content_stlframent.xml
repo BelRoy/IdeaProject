@@ -10,6 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".fragments.STLFragment"
-    tools:showIn="@layout/app_bar_stlframent">
+    tools:showIn="@layout/app_bar_stlframent"
+    android:background="@color/stl">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/items_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

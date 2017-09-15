@@ -10,6 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.devqt.idea.project.fragments.mBotFragment"
-    tools:showIn="@layout/app_bar_m_bot_fragment">
+    tools:showIn="@layout/app_bar_m_bot_fragment"
+    android:background="@color/mbot">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/items_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

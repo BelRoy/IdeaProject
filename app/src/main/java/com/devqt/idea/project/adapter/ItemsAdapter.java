@@ -1,3 +1,4 @@
+/*
 package com.devqt.idea.project.adapter;
 
 
@@ -41,20 +42,25 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
     class ItemsViewHolder extends RecyclerView.ViewHolder{
 
         TextView name;
-        /*TextView description
+        */
+/*TextView description
         ImageView icon;
-        VideoView video;*/
+        VideoView video;*//*
+
 
         public ItemsViewHolder(View itemView){
             super(itemView);
 
             name = (TextView) itemView.findViewById(R.id.nameTxt);
-            /*description = (TextView) itemView.findViewById(R.id.description);
+            */
+/*description = (TextView) itemView.findViewById(R.id.description);
             icon = (ImageView) itemView.findViewById(R.id.img);
-            video = (VideoView) itemView.findViewById(R.id.videoApp);*/
+            video = (VideoView) itemView.findViewById(R.id.videoApp);*//*
+
 
 
         }
 
     }
 }
+*/

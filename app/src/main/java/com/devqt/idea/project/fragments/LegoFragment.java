@@ -1,24 +1,40 @@
 package com.devqt.idea.project.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.devqt.idea.project.LogIn;
 import com.devqt.idea.project.R;
+import com.devqt.idea.project.adapter.ItemsModel;
 import com.devqt.idea.project.etc.AboutMe;
 import com.devqt.idea.project.etc.Settings;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 public class LegoFragment extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RecyclerView mBlogList;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +42,14 @@ public class LegoFragment extends AppCompatActivity
         setContentView(R.layout.lego_fragment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mBlogList = (RecyclerView)findViewById(R.id.items_list);
+        mBlogList.setHasFixedSize(true);
+        mBlogList.setLayoutManager(new LinearLayoutManager(this));
+
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("android");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,6 +61,57 @@ public class LegoFragment extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseRecyclerAdapter<ItemsModel, LegoFragment.BlogViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<ItemsModel, LegoFragment.BlogViewHolder>(
+                        ItemsModel.class,
+                        R.layout.elements_row,
+                        LegoFragment.BlogViewHolder.class,
+                        myRef)  {
+
+
+
+                    @Override
+                    protected void populateViewHolder(LegoFragment.BlogViewHolder viewHolder, ItemsModel model, int position) {
+                        viewHolder.setTitle(model.getName());
+                        viewHolder.setImage(getApplicationContext(), model.getIcon());
+                    }
+                };
+        mBlogList.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class BlogViewHolder extends RecyclerView.ViewHolder  {
+        View mView;
+        public BlogViewHolder(View itemView) {
+            super(itemView);
+            mView= itemView;
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://idea-projects-380e3.firebaseio.com/"));
+                    Intent browserChooserIntent = Intent.createChooser(browserIntent , "Choose browser of your choice");
+                    v.getContext().startActivity(browserChooserIntent);
+                }
+            });
+
+        }
+        public void setTitle(String title){
+            TextView post_title = (TextView)mView.findViewById(R.id.nameTxt);
+            post_title.setText(title);
+        }
+        public void setImage(Context ctx , String image){
+            ImageView post_image = (ImageView)mView.findViewById(R.id.img);
+
+            Picasso.with(ctx).load(image).into(post_image);
+        }
+    }
+
+
 
     @Override
     public void onBackPressed() {

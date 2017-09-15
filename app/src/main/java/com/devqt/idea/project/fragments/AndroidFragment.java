@@ -1,6 +1,8 @@
 package com.devqt.idea.project.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,29 +15,27 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.devqt.idea.project.LogIn;
 import com.devqt.idea.project.R;
-import com.devqt.idea.project.adapter.ItemsAdapter;
 import com.devqt.idea.project.adapter.ItemsModel;
 import com.devqt.idea.project.etc.AboutMe;
 import com.devqt.idea.project.etc.Settings;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.squareup.picasso.Picasso;
 
 public class AndroidFragment extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RecyclerView recyclerView;
-    private List<ItemsModel> result;
-    private ItemsAdapter itemsAdapter;
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
-    final int N = 10;
+    private RecyclerView mBlogList;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
 
 
     @Override
@@ -45,21 +45,13 @@ public class AndroidFragment extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mBlogList = (RecyclerView)findViewById(R.id.items_list);
+        mBlogList.setHasFixedSize(true);
+        mBlogList.setLayoutManager(new LinearLayoutManager(this));
+
+
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("android");
-
-
-        result = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.items_list);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-
-        createResult();
-
-        itemsAdapter = new ItemsAdapter(result);
-        recyclerView.setAdapter(itemsAdapter);
+        myRef = database.getReference("android");
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -77,28 +69,52 @@ public class AndroidFragment extends AppCompatActivity
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    protected void onStart() {
+        super.onStart();
 
-        switch (item.getItemId()){
+        FirebaseRecyclerAdapter<ItemsModel, BlogViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<ItemsModel, BlogViewHolder>(
+                        ItemsModel.class,
+                        R.layout.elements_row,
+                        BlogViewHolder.class,
+                        myRef)  {
 
-            case 0:
-                break;
 
-            case 1:
-                break;
-        }
 
-        return super.onContextItemSelected(item);
+                    @Override
+                    protected void populateViewHolder(BlogViewHolder viewHolder, ItemsModel model,int position) {
+                        viewHolder.setTitle(model.getName());
+                        viewHolder.setImage(getApplicationContext(), model.getIcon());
+                    }
+                };
+        mBlogList.setAdapter(firebaseRecyclerAdapter);
     }
 
-    private void  createResult(){
+    public static class BlogViewHolder extends RecyclerView.ViewHolder  {
+        View mView;
+        public BlogViewHolder(View itemView) {
+            super(itemView);
+            mView= itemView;
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://idea-projects-380e3.firebaseio.com/"));
+                    Intent browserChooserIntent = Intent.createChooser(browserIntent , "Choose browser of your choice");
+                    v.getContext().startActivity(browserChooserIntent);
+                }
+            });
 
-
-        for (int i = 0; i < N; i++){
-
-            result.add(new ItemsModel("name","description","icon",""));
         }
+        public void setTitle(String title){
+            TextView post_title = (TextView)mView.findViewById(R.id.nameTxt);
+            post_title.setText(title);
+        }
+        public void setImage(Context ctx , String image){
+            ImageView post_image = (ImageView)mView.findViewById(R.id.img);
 
+            Picasso.with(ctx).load(image).into(post_image);
+        }
     }
 
 
