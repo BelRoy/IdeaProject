@@ -22,6 +22,7 @@
     <dimen name="floating_height">650dp</dimen>
     <dimen name="floating_width">500dp</dimen>
     <dimen name="txt_15">15dp</dimen>
+    <dimen name="txt_12">12dp</dimen>
     <dimen name="txt_18">18dp</dimen>
     <dimen name="txt_24">24dp</dimen>
     <dimen name="txt_20">20dp</dimen>

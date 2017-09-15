@@ -110,6 +110,7 @@ public class AndroidFragment extends AppCompatActivity
             TextView post_title = (TextView)mView.findViewById(R.id.nameTxt);
             post_title.setText(title);
         }
+
         public void setImage(Context ctx , String image){
             ImageView post_image = (ImageView)mView.findViewById(R.id.img);
 

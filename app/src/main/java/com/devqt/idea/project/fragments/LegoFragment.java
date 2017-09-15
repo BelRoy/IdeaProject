@@ -49,7 +49,7 @@ public class LegoFragment extends AppCompatActivity
 
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("android");
+        myRef = database.getReference("lego");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
