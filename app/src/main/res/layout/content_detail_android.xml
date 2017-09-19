@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorContent">
-
-
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.devqt.idea.project.full_page.DetailAndroid"
+    tools:showIn="@layout/app_bar_detail_android">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:background="@color/white"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -19,14 +20,14 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/name_app"
+            android:id="@+id/name"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_app"
+            android:id="@+id/icon"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -39,7 +40,7 @@
             android:background="@drawable/shape"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/name_app" />
+            android:layout_below="@+id/name" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -52,7 +53,7 @@
             <VideoView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/videoApp"
+                android:id="@+id/video"
                 android:scrollbars="vertical"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -70,7 +71,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-
 
 </RelativeLayout>

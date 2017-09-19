@@ -40,4 +40,10 @@
     <string name="cashe">Clear cache</string>
     <string name="mbot">mBot</string>
     <string name="action_search">Search</string>
+    <string name="edt_m">Edit E-mail</string>
+    <string name="edt_p">Edit Password</string>
+    <string name="auth_b">Auth buy pass</string>
+    <string name="account">Account manager</string>
+    <string name="st_m">Settings manager</string>
+    <string name="clr">Clear cache</string>
 </resources>

@@ -2,7 +2,6 @@ package com.devqt.idea.project.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -96,13 +95,22 @@ public class AndroidFragment extends AppCompatActivity
             super(itemView);
             mView= itemView;
             itemView.setOnClickListener(new View.OnClickListener() {
+
+
+
                 @Override
                 public void onClick(View v) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+
+                    
+                   /* Intent browserIntent = new Intent(Intent.ACTION_VIEW,
                             Uri.parse("https://idea-projects-380e3.firebaseio.com/"));
                     Intent browserChooserIntent = Intent.createChooser(browserIntent , "Choose browser of your choice");
-                    v.getContext().startActivity(browserChooserIntent);
+                    v.getContext().startActivity(browserChooserIntent);*/
                 }
+
+
+
+
             });
 
         }

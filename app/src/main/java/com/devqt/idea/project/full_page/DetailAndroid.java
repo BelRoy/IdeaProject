@@ -1,4 +1,4 @@
-package com.devqt.idea.project.etc;
+package com.devqt.idea.project.full_page;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.view.MenuItem;
 
 import com.devqt.idea.project.LogIn;
 import com.devqt.idea.project.R;
+import com.devqt.idea.project.etc.AboutMe;
+import com.devqt.idea.project.etc.Settings;
 import com.devqt.idea.project.fragments.AndroidFragment;
 import com.devqt.idea.project.fragments.ArduinoFragment;
 import com.devqt.idea.project.fragments.LegoFragment;
@@ -22,13 +24,13 @@ import com.devqt.idea.project.fragments.STLFragment;
 import com.devqt.idea.project.fragments.mBotFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Settings extends AppCompatActivity
+public class DetailAndroid extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.activity_detail_android);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,7 +44,6 @@ public class Settings extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -58,20 +59,18 @@ public class Settings extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu_sett, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     private void signOut()
     {
         FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(Settings.this, LogIn.class);
+        Intent intent = new Intent(DetailAndroid.this, LogIn.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -81,7 +80,12 @@ public class Settings extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-
+        if (id == R.id.action_search) {
+            return true;
+        }
+        if (id == R.id.action_refresh) {
+            return true;
+        }
         if (id == R.id.exit) {
             signOut(); finish();
             return true;
@@ -96,48 +100,48 @@ public class Settings extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id) {
-        case R.id.android:
-        Intent h = new Intent(Settings.this, AndroidFragment.class);
-        startActivity(h);
-            finish();
-        break;
-        case R.id.arduino:
-        Intent i = new Intent(Settings.this, ArduinoFragment.class);
-        startActivity(i);
-            finish();
-        break;
-        case R.id.lego:
-        Intent g = new Intent(Settings.this, LegoFragment.class);
-        startActivity(g);
-            finish();
-        break;
-        case R.id.stl:
-        Intent s = new Intent(Settings.this, STLFragment.class);
-        startActivity(s);
-            finish();
-            break;
-        case R.id.max:
-        Intent t = new Intent(Settings.this, MaxFragment.class);
-        startActivity(t);
-            finish();
-        break;
 
-        case R.id.mbot:
-         Intent b = new Intent(Settings.this,mBotFragment.class);
-         startActivity(b);
-         finish();
-         break;
-        case R.id.about_me:
-        Intent m = new Intent(Settings.this, AboutMe.class);
-        startActivity(m);
-            finish();
-        break;
-        case R.id.sett:
-        Intent st = new Intent(Settings.this, Settings.class);
-        startActivity(st);
-            finish();
-        break;
-    }
+            case R.id.android:
+                Intent h = new Intent(DetailAndroid.this, AndroidFragment.class);
+                startActivity(h);
+                finish();
+                break;
+            case R.id.arduino:
+                Intent i = new Intent(DetailAndroid.this, ArduinoFragment.class);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.lego:
+                Intent g = new Intent(DetailAndroid.this, LegoFragment.class);
+                startActivity(g);
+                finish();
+                break;
+            case R.id.stl:
+                Intent s = new Intent(DetailAndroid.this, STLFragment.class);
+                startActivity(s);
+                finish();
+                break;
+            case R.id.max:
+                Intent t = new Intent(DetailAndroid.this, MaxFragment.class);
+                startActivity(t);
+                finish();
+                break;
+            case R.id.mbot:
+                Intent b = new Intent(DetailAndroid.this, mBotFragment.class);
+                startActivity(b);
+                finish();
+                break;
+            case R.id.about_me:
+                Intent m = new Intent(DetailAndroid.this, AboutMe.class);
+                startActivity(m);
+                finish();
+                break;
+            case R.id.sett:
+                Intent st = new Intent(DetailAndroid.this, Settings.class);
+                startActivity(st);
+                finish();
+                break;
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
